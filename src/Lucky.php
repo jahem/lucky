@@ -23,12 +23,6 @@ class Lucky {
     public function __construct(array $data) {
         $this->data = $data; //抽奖数据
         $this->sum = 0; //总计
-    }
-
-    /**
-     * 初始化
-     */
-    public function init() {
         //格式化数据
         foreach ($this->data as $value) {
             $this->data[$value['id']] = $value['id'];
@@ -43,7 +37,7 @@ class Lucky {
         //中奖项
         $id = '';
         //概率数组循环
-        foreach ($this->arr as $k => $v) {
+        foreach ($this->data as $k => $v) {
             $randNum = mt_rand(1, $this->sum);
             if ($randNum <= $v) {
                 $id = $k;
