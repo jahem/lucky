@@ -9,48 +9,53 @@ namespace Lucky;
 class Lucky {
 
     /**
-     * 数据
-     * @var array 
+     * 概率样本
+     * @var type 
      */
-    protected $config;
-    /**
-     * 抽奖数据
-     * @var array 
-     */
-    protected $data;
+    protected $prize_arr;
 
     /**
-     * 总计
-     * @var int 
+     * 概率总计
+     * @var type 
      */
-    protected $sum;
+    protected $arr;
 
-    public function __construct(array $config) {
-        $this->sum = 0; //总计
-        //格式化数据
-        foreach ($config as $value) {
-            $this->data[$value['id']] = $value['id'];
-            $this->sum = $this->sum + $value["chance"];
+    /**
+     * 初始样本和概率总计 （应存储在数据库）
+     */
+    public function __construct($prize_arr) {
+        //外部传入初始样本
+        foreach ($prize_arr as $key => $value) {
+            $this->prize_arr[$value['id']] = $value;
+        }
+        foreach ($this->prize_arr as $k => $v) {
+            //循环得出概率总计
+            $this->arr[$k] = $v['chance'];
         }
     }
 
     /**
-     * 开始
+     * 开始概率事件
+     * @return type
      */
     public function start() {
-        //中奖项
-        $id = '';
+        //样本下标
+        $prize_id = '';
+        //概率数组的总概率精度
+        $proSum = array_sum($this->arr);
         //概率数组循环
-        foreach ($this->data as $k => $v) {
-            $randNum = mt_rand(1, $this->sum);
+        foreach ($this->arr as $k => $v) {
+            $randNum = mt_rand(1, $proSum);
             if ($randNum <= $v) {
-                $id = $k;
+                $prize_id = $k;
                 break;
             } else {
-                $this->sum -= $v;
+                $proSum -= $v;
             }
         }
-        return $id;
+        //中奖项
+        $res = $this->prize_arr[$prize_id];
+        return $res;
     }
 
 }
