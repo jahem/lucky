@@ -31,8 +31,8 @@ class Lucky {
     public function init() {
         //格式化数据
         foreach ($this->data as $value) {
-            $this->data[$value['id']] = $value;
-            $this->sum = $this->sum + $value;
+            $this->data[$value['id']] = $value['id'];
+            $this->sum = $this->sum + $value["chance"];
         }
     }
 
