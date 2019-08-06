@@ -9,6 +9,11 @@ namespace Lucky;
 class Lucky {
 
     /**
+     * 数据
+     * @var array 
+     */
+    protected $config;
+    /**
      * 抽奖数据
      * @var array 
      */
@@ -20,11 +25,10 @@ class Lucky {
      */
     protected $sum;
 
-    public function __construct(array $data) {
-        $this->data = $data; //抽奖数据
+    public function __construct(array $config) {
         $this->sum = 0; //总计
         //格式化数据
-        foreach ($this->data as $value) {
+        foreach ($config as $value) {
             $this->data[$value['id']] = $value['id'];
             $this->sum = $this->sum + $value["chance"];
         }
