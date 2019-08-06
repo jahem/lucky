@@ -46,7 +46,6 @@ class Lucky {
                 $this->sum -= $v;
             }
         }
-        //中奖项
         return $id;
     }
 
