@@ -1,0 +1,21 @@
+{
+    "name": "jahem/lucky",
+    "description": "lucky",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "jahem",
+            "email": "13680653051@163.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php" : ">=7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "lucky\\" : "src/"
+        }
+    }
+}
